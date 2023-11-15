@@ -1,20 +1,22 @@
-import { Command } from "./Commands"
+import app from './App.vue'
+import { CommandFactory } from './Factory'
 
 export class Executer {
-    private register: { [key: string]: new (arg: string) => Command } = {};
-  
-    registerCommand(name: string, commandConstructor: new (arg: string) => Command) {
-      this.register[name] = commandConstructor;
+    /**
+     * Executes a command based on the key
+     */
+    public execute(key: string, args: string, the_app: typeof app): void {
+        /**
+         * Running the builder to get the right function and run it.
+         * args:
+         * @param key: string that contains the type of function to call
+         * @param args: contains the the second part of the input
+         * @param the_app: contains the 'this' keyword of the App.vue
+         */
+        const builder = new CommandFactory()
+        console.log("Key: ", key)
+        const sorter = builder.buildCommand(key)
+        sorter.execute([the_app, args]) 
     }
-  
-    execute(key: string, arg: string) {
-      const CommandConstructor = this.register[key];
-      if (CommandConstructor) {
-        const command = new CommandConstructor(arg);
-        command.execute();
-      } else {
-        console.log('Unknown command:', key);
-      }
-    }
-  }
-  
+}
+
