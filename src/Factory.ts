@@ -13,6 +13,7 @@ export class CommandFactory {
          * @return Returns an object of the correct command.
          */
         const command = CommandDict[key]
+        console.log("Test key 2222: ", key)
         const object = new command()
 
         return object

@@ -58,6 +58,7 @@ export default {
 
           const executer = new Executer()
           executer.execute(key, value, this)
+          console.log("Test start and end, ", this.filter_start, this.filter_end)
 
         } else {
           console.log('Ignoring command', command)
@@ -84,12 +85,15 @@ export default {
         var params : { [key: string]: string } = {}
         if (this.filter_type != '') {
           params['type_id'] = this.filter_type
+          console.log("type_id filter")
         }
         if (this.filter_end != '') {
           params['end'] = this.filter_end
+          console.log("type_id end")
         }
         if (this.filter_start != '') {
           params['start']=this.filter_start
+          console.log("type_id start")
         }
         console.log('Trying to get url', url)
         axios
@@ -103,7 +107,6 @@ export default {
           })
       })
       return promise
-
     }
   }
 }

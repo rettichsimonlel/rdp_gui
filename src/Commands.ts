@@ -46,7 +46,7 @@ class CommandEnd extends Command {
   /**
    * Command for sorting the output based on start.
    */
-  public sort(args: [typeof app, string]): void {
+  public execute(args: [typeof app, string]): void {
     /**
      * Executes the sort
      * @param args: 
@@ -63,8 +63,8 @@ export const CommandDict: { [key: string] : typeof Command } = {
    * based on the key.
    * @param key: string that contains the type of function to call
    */
-  "type": CommandType,
-  "start": CommandStart,
-  "end": CommandEnd,
+  type: CommandType,
+  start: CommandStart,
+  end: CommandEnd,
 }
 
