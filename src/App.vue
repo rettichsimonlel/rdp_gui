@@ -7,6 +7,8 @@ import TypesDisplay from './components/TypesDisplay.vue'
 
 import { ValueType } from './scripts/value_type'
 import { Value } from './scripts/value'
+import { Device } from './scripts/device'
+import { Location } from './scripts/location'
 
 import { Executer } from "./Executer"
 import { CommandType } from "./Commands"
@@ -21,6 +23,8 @@ export default {
     return {
       values: new Array<Value>(),
       value_types: new Array<ValueType>(),
+      devices: new Array<Device>(),
+      locations: new Array<Location>(),
       filter_start : '',
       filter_end : '',
       filter_type : ''
@@ -28,6 +32,8 @@ export default {
   },
   mounted() {
     this.get_types()
+    this.get_devices()
+    this.get_locations()
     this.get_values().then((data) => {
       this.values = data
     })
@@ -78,8 +84,27 @@ export default {
           console.error(error)
         })
     },
+    get_devices() {
+      axios
+        .get('/api/device/')
+        .then((result) => {
+          this.devices = result.data
+        })
+        .catch((error) => {
+          console.error(error)
+        })
+    },
+    get_locations() {
+      axios
+        .get('/api/location/')
+        .then((result) => {
+          this.locations = result.data
+        })
+        .catch((error) => {
+          console.error(error)
+        })
+    },
     get_values() {
-
       const promise = new Promise<Value[]>((accept, reject) => {
         const url = '/api/value/'
         var params : { [key: string]: string } = {}
@@ -118,6 +143,6 @@ export default {
     <h1 class="row">RDP</h1>
     <InputBar @search="update_search" />
     <TypesDisplay :value_types="value_types" @update_type="get_types" />
-    <ValuesDisplay :values="values" :value_types="value_types" />
+    <ValuesDisplay :values="values" :value_types="value_types" :devices="devices" :locations="locations" />
   </div>
 </template>
