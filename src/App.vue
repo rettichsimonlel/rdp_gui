@@ -27,7 +27,8 @@ export default {
       locations: new Array<Location>(),
       filter_start : '',
       filter_end : '',
-      filter_type : ''
+      filter_type : '',
+      filter_device : ''
     }
   },
   mounted() {
@@ -54,6 +55,7 @@ export default {
       this.filter_end=''
       this.filter_start=''
       this.filter_type=''
+      this.filter_device=''
       for (var i = 0; i < args.length; i++) {
         const command = args[i]
         console.log('handling command', command)
@@ -119,6 +121,10 @@ export default {
         if (this.filter_start != '') {
           params['start']=this.filter_start
           console.log("type_id start")
+        }
+        if (this.filter_device != '') {
+          params['device']=this.filter_device
+          console.log("type_id device")
         }
         console.log('Trying to get url', url)
         axios

@@ -57,6 +57,21 @@ class CommandEnd extends Command {
   }
 }
 
+class CommandDevice extends Command {
+  /**
+   * Command for sorting the output based on start.
+   */
+  public execute(args: [typeof app, string]): void {
+    /**
+     * Executes the sort
+     * @param args: 
+     *  - [0]: a reference to the App.vue functions and variables
+     *  - [1]: the second part of the input 
+     */
+    args[0].filter_device = args[1]
+  }
+}
+
 export const CommandDict: { [key: string] : typeof Command } = {
   /**
    * Exports a Dict with the different command functions
@@ -66,5 +81,6 @@ export const CommandDict: { [key: string] : typeof Command } = {
   type: CommandType,
   start: CommandStart,
   end: CommandEnd,
+  device: CommandDevice,
 }
 
