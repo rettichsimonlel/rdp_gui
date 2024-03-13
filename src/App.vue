@@ -4,6 +4,8 @@ import axios from 'axios'
 import InputBar from './components/InputBar.vue'
 import ValuesDisplay from './components/ValuesDisplay.vue'
 import TypesDisplay from './components/TypesDisplay.vue'
+import DevicesDisplay from './components/DevicesDisplay.vue'
+import LocationsDisplay from './components/LocationsDisplay.vue'
 
 import { ValueType } from './scripts/value_type'
 import { Value } from './scripts/value'
@@ -105,6 +107,7 @@ export default {
         .catch((error) => {
           console.error(error)
         })
+      console.log(this.locations)
     },
     get_values() {
       const promise = new Promise<Value[]>((accept, reject) => {
@@ -149,6 +152,8 @@ export default {
     <h1 class="row">RDP</h1>
     <InputBar @search="update_search" />
     <TypesDisplay :value_types="value_types" @update_type="get_types" />
+    <DevicesDisplay :devices="devices" :locations="locations" @update_device="get_devices" />
+    <LocationsDisplay :locations="locations" @update_location="get_locations" />
     <ValuesDisplay :values="values" :value_types="value_types" :devices="devices" :locations="locations" />
   </div>
 </template>
